@@ -1,24 +1,42 @@
-interface CheckBoxProps {
-  id: string
-  label: string
-  name: string
-  value: boolean
-  onChange: (value: boolean) => void
+import clsx from 'clsx'
+
+interface CheckBoxProps
+  extends Omit<React.HTMLProps<HTMLInputElement>, 'onChange'> {
+  id?: string
+  label?: string
+  name?: string
+  checked?: boolean
+  onChange?: (value: boolean) => void
+  readOnly?: boolean
 }
 
-const CheckBox = ({ id, label, name, value, onChange }: CheckBoxProps) => {
+const CheckBox = ({
+  id,
+  label,
+  name,
+  checked,
+  onChange,
+  readOnly,
+  ...props
+}: CheckBoxProps) => {
   return (
-    <label htmlFor={id} className="flex gap-1">
-      <span className="label-text">{label}</span>
-      <input
-        id={id}
-        type="checkbox"
-        className="checkbox checkbox-primary checkbox-sm"
-        name={name}
-        checked={value}
-        onChange={(e) => onChange(e.target.checked)}
-      />
-    </label>
+    <div className="form-control py-2">
+      <label htmlFor={id} className="label cursor-pointer gap-2">
+        <span className="label-text">{label}</span>
+        <input
+          {...props}
+          id={id}
+          type="checkbox"
+          className={clsx(`checkbox checkbox-sm`, {
+            ['cursor-default']: readOnly
+          })}
+          readOnly={readOnly}
+          name={name}
+          checked={checked}
+          onChange={(e) => onChange?.(e.target.checked)}
+        />
+      </label>
+    </div>
   )
 }
 

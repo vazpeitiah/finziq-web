@@ -1,3 +1,5 @@
+import clsx from 'clsx'
+
 import InputContainer from 'components/InputContainer/InputContainer'
 
 interface TextFieldProps {
@@ -30,8 +32,10 @@ const TextField = ({
         value={value}
         name={name}
         onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className="input input-sm input-bordered"
+        placeholder={placeholder ?? label}
+        className={clsx('input input-sm input-bordered', {
+          ['input-error']: showError
+        })}
       />
     </InputContainer>
   )

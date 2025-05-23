@@ -1,18 +1,14 @@
-import { createColumnHelper } from '@tanstack/react-table'
-import clsx from 'clsx'
-import { Edit, PlusSquareSolid, Trash, UploadSquareSolid } from 'iconoir-react'
+import { PlusSquareSolid, UploadSquareSolid } from 'iconoir-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { Modal } from 'components'
-import Table from 'components/Table/Table'
+import { Modal, Table } from 'components'
 import AppFrame from 'frames/AppFrame'
 import { Transaction } from 'models/Transaction'
 import { useAlerts } from 'providers/AlertsProvider'
 import useGetAccounts from 'queries/accounts/useGetAccounts'
 import useGetCategories from 'queries/categories/useGetCategories'
 import useDeleteTransaction from 'queries/transactions/useDeleteTransaction'
-import useGetBalance from 'queries/transactions/useGetBalance'
 import useGetTransactions from 'queries/transactions/useGetTransactions'
 import { TransactionTypes } from 'utils/config'
 import { cn, formatDate, formatLocalCurrency } from 'utils/helpers'
@@ -33,21 +29,10 @@ const HomePage = () => {
   const [showModal, setShowModal] = useState(false)
   const [showCreateModal, setShowCreateModal] = useState(false)
 
-  const handleDelete = (id: number) => {
-    alerts.confirm(t('transactions.confirmDelete'), () => {
-      deleteTransaction(id)
-    })
-  }
-
-  const handleEdit = (transaction: Transaction) => {
-    setSelectedTransaction(transaction)
-  }
-
   const handleClose = () => {
     setShowCreateModal(false)
     setSelectedTransaction(null)
   }
-  const columnHelper = createColumnHelper<Transaction>()
 
   return (
     <AppFrame>
@@ -85,6 +70,7 @@ const HomePage = () => {
       <div className="my-2 h-[1px] bg-secondary-content w-full" />
       <div className="flex gap-4 items-start mt-4">
         <Table
+          groupBy="date"
           data={transactions ?? []}
           columns={[
             {
@@ -103,7 +89,7 @@ const HomePage = () => {
                       ['text-xs']: row.description
                     })}
                   >
-                    {getAccountById(row.account as number)?.name}
+                    {getAccountById(row.account)?.name}
                   </span>
                 </div>
               )
@@ -111,7 +97,7 @@ const HomePage = () => {
             {
               id: 'category',
               header: t('transactions.category'),
-              render: (row) => getCategoryById(row.category as number)?.name
+              render: (row) => getCategoryById(row.category)?.name
             },
             {
               id: 'amount',

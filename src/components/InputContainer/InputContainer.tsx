@@ -14,16 +14,16 @@ const InputContainer = ({
   children
 }: InputContainerProps) => {
   return (
-    <label className="form-control" htmlFor={id}>
-      <div className="label">
+    <label className="form-control w-full" htmlFor={id}>
+      <div className="label ml-1">
         <span className="label-text text-sm">{label}</span>
       </div>
       {children}
-      <div className="label">
-        {showError && (
-          <span className="label-text-alt text-error text-xs">{error}</span>
-        )}
-      </div>
+      {showError && (
+        <div className="label">
+          <span className="label-text-alt text-xs text-error">{error}</span>
+        </div>
+      )}
     </label>
   )
 }

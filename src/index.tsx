@@ -5,7 +5,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { initReactI18next } from 'react-i18next'
 
-import es from 'locale/es/translation.json'
+import es from 'locales/es/translation.json'
 import { AlertsProvider } from 'providers/AlertsProvider'
 import { queryClient } from 'queries/queryClient'
 

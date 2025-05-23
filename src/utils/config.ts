@@ -2,8 +2,16 @@ import { SelectOption } from './types'
 
 export const ROUTES = {
   home: '/',
-  account: '/account',
-  category: '/category'
+  accounts: {
+    root: '/accounts',
+    add: '/accounts/add',
+    edit: '/accounts/edit'
+  },
+  categories: {
+    root: '/categories',
+    add: '/categories/add',
+    edit: '/categories/edit'
+  }
 }
 
 export const API_URL = import.meta.env.VITE_API_URL
@@ -15,7 +23,7 @@ export enum TransactionTypes {
 }
 
 export const TransactionTypesOptions: SelectOption[] = [
-  { value: TransactionTypes.INCOME, label: 'transactionTypes.income' },
+  { value: TransactionTypes.INCOME, label: 'transactionTypes.incomes' },
   { value: TransactionTypes.EXPENSE, label: 'transactionTypes.expenses' },
   { value: TransactionTypes.TRANSFER, label: 'transactionTypes.transfers' }
 ]
@@ -23,4 +31,11 @@ export const TransactionTypesOptions: SelectOption[] = [
 export const DateFormats = {
   short: 'DD/MM/YYYY',
   long: 'DD/MM/YYYY HH:mm:ss'
+}
+
+export const QueryKeys = {
+  subcategories: {
+    read: 'subcategories',
+    create: 'createSubcategory'
+  }
 }

@@ -1,0 +1,8 @@
+.app__nav {
+  @apply w-full flex justify-between items-center py-8 px-4 md:px-0;
+  @apply flex-col sm:flex-row;
+}
+
+.app__nav__header {
+  @apply text-xl navbar-start flex gap-2 font-light items-center;
+}

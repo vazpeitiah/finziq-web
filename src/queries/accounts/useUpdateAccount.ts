@@ -3,20 +3,25 @@ import { AxiosError, AxiosResponse } from 'axios'
 import { useEffect } from 'react'
 
 import { updateAccount } from 'api/accounts'
-import { Account } from 'models/Account'
+import { Account, UpdateAccount } from 'models/Account'
 import ErrorType from 'models/Error'
 import { useAlerts } from 'providers/AlertsProvider'
 import { QK_GET_ACCOUNTS } from 'queries/accounts/useGetAccounts'
 import { queryClient } from 'queries/queryClient'
+
+interface UseUpdateAccountParams {
+  id: string
+  body: UpdateAccount
+}
 
 const useUpdateAccount = () => {
   const alerts = useAlerts()
   const { data, isError, isSuccess, isPending, mutate, error } = useMutation<
     AxiosResponse<Account>,
     AxiosError<ErrorType>,
-    Account
+    UseUpdateAccountParams
   >({
-    mutationFn: (data) => updateAccount(data),
+    mutationFn: (data) => updateAccount(data.id, data.body),
     onSettled: () =>
       queryClient.invalidateQueries({
         queryKey: [QK_GET_ACCOUNTS]

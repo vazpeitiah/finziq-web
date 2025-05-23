@@ -1,7 +1,7 @@
 import { CheckCircle, WarningCircle, XmarkCircleSolid } from 'iconoir-react'
 import { useTranslation } from 'react-i18next'
 
-import Modal from 'components/Modal/Modal'
+import { Modal } from 'components'
 
 import styles from './alert.module.css'
 

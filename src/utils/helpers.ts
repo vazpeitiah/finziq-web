@@ -37,3 +37,17 @@ export const formatLocalCurrency = (amount: number): string => {
 export const cn = (...args: ClassValue[]) => {
   return twMerge(clsx(args))
 }
+
+export const formattedRoute = (
+  r: string,
+  t: (k: string) => string,
+  base = 'breadcrumbs.'
+) => {
+  let route = new String(r)
+  if (route.split('').findIndex((c) => c === '/') === 0) {
+    route = route.slice(1)
+  }
+  return route.includes('/')
+    ? t(`${base}${route.replace(/\//g, '.')}`)
+    : t(`${base}${route.replace(/\//g, '.')}.title`)
+}

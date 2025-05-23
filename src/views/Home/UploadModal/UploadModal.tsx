@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Modal from 'components/Modal/Modal'
+import { Modal } from 'components'
 import useCreateBatchTransactions from 'queries/transactions/useCreateBatchTransaction'
 
 interface UploadModalProps {

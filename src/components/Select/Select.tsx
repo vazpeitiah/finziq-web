@@ -1,7 +1,9 @@
 import InputContainer from 'components/InputContainer/InputContainer'
+import { cn } from 'utils/helpers'
 import { SelectOption } from 'utils/types'
 
-interface SelectProps {
+interface SelectProps
+  extends Omit<React.HTMLProps<HTMLSelectElement>, 'onChange'> {
   id: string
   label: string
   name: string
@@ -11,6 +13,7 @@ interface SelectProps {
   error?: string
   showError?: boolean
   defaultValue?: string
+  disabled?: boolean
 }
 
 const Select = ({
@@ -21,12 +24,19 @@ const Select = ({
   onChange,
   error,
   showError,
-  options
+  options,
+  disabled,
+  ...props
 }: SelectProps) => {
   return (
     <InputContainer id={id} label={label} showError={showError} error={error}>
       <select
-        className="select select-sm select-bordered "
+        {...props}
+        disabled={disabled}
+        className={cn('select select-sm select-bordered', {
+          ['input-error']: showError,
+          ['input-disabled']: disabled
+        })}
         id={id}
         name={name}
         onChange={(e) => onChange(e.target.value)}

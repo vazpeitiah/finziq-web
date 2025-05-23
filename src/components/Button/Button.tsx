@@ -7,13 +7,15 @@ type Variant =
   | 'error'
   | 'warning'
   | 'success'
+  | 'outline'
 
 interface ButtonProps {
   onClick?: () => void
   disabled?: boolean
-  children: React.ReactNode
+  children?: React.ReactNode
   variant?: Variant
   type?: HTMLButtonElement['type']
+  className?: string
 }
 
 const Button = ({
@@ -21,11 +23,12 @@ const Button = ({
   disabled,
   children,
   variant = 'primary',
-  type = 'button'
+  type = 'button',
+  className
 }: ButtonProps) => {
   return (
     <button
-      className={cn('btn btn-sm', `btn-${variant}`)}
+      className={cn('btn btn-xs', `btn-${variant}`, className)}
       onClick={onClick}
       disabled={disabled}
       type={type}

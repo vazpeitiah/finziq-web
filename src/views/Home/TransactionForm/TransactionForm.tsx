@@ -2,8 +2,7 @@ import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-import { DatePicker, Select, TextField } from 'components'
-import Button from 'components/Button'
+import { Button, DatePicker, Select, TextField } from 'components'
 import { Transaction } from 'models/Transaction'
 import useGetAccounts from 'queries/accounts/useGetAccounts'
 import useGetCategories from 'queries/categories/useGetCategories'
@@ -39,7 +38,6 @@ const TransactionForm = ({ transaction, onCancel }: TransactionFormProps) => {
   })
   const type = watch('type')
   const { categories } = useGetCategories(type)
-  console.log({ categories })
 
   useEffect(() => {
     if (isSuccess || isSuccessUpdated) {

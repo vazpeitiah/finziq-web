@@ -1,5 +1,4 @@
-import { Filters, Transaction, transactionSchema } from 'models/Transaction'
-import { TransactionTypes } from 'utils/config'
+import { Transaction, transactionSchema } from 'models/Transaction'
 
 import api from './api'
 
